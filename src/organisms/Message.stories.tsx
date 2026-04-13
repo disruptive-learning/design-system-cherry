@@ -17,7 +17,7 @@ export const UserMessage: Story = {
   render: () => (
     <Message className="max-w-md">
       <MessageAvatar
-        src="https://github.com/shadcn.png"
+        src="/avatar-cherry.png"
         alt="User"
         fallback="U"
       />
@@ -32,7 +32,7 @@ export const AssistantMessage: Story = {
   render: () => (
     <Message className="max-w-md">
       <MessageAvatar
-        src="https://github.com/vercel.png"
+        src="/logo_cherry.png"
         alt="Assistant"
         fallback="AI"
       />
@@ -48,7 +48,7 @@ export const WithActions: Story = {
     <div className="max-w-md space-y-2">
       <Message>
         <MessageAvatar
-          src="https://github.com/vercel.png"
+          src="/logo_cherry.png"
           alt="Assistant"
           fallback="AI"
         />
@@ -82,7 +82,7 @@ export const Conversation: Story = {
     <div className="max-w-lg space-y-4">
       <Message>
         <MessageAvatar
-          src="https://github.com/shadcn.png"
+          src="/avatar-cherry.png"
           alt="User"
           fallback="U"
         />
@@ -92,7 +92,7 @@ export const Conversation: Story = {
       </Message>
       <Message>
         <MessageAvatar
-          src="https://github.com/vercel.png"
+          src="/logo_cherry.png"
           alt="Assistant"
           fallback="AI"
         />
@@ -109,7 +109,7 @@ export const DifferentStyles: Story = {
     <div className="max-w-lg space-y-4">
       <Message>
         <MessageAvatar
-          src="https://github.com/shadcn.png"
+          src="/avatar-cherry.png"
           alt="User"
           fallback="U"
         />
@@ -119,7 +119,7 @@ export const DifferentStyles: Story = {
       </Message>
       <Message>
         <MessageAvatar
-          src="https://github.com/vercel.png"
+          src="/logo_cherry.png"
           alt="AI"
           fallback="AI"
         />
