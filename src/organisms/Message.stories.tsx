@@ -32,7 +32,7 @@ export const AssistantMessage: Story = {
   render: () => (
     <Message className="max-w-md">
       <MessageAvatar
-        src="/logo_cherry.png"
+        src="/avatar-assistant.png"
         alt="Assistant"
         fallback="AI"
       />
@@ -48,7 +48,7 @@ export const WithActions: Story = {
     <div className="max-w-md space-y-2">
       <Message>
         <MessageAvatar
-          src="/logo_cherry.png"
+          src="/avatar-assistant.png"
           alt="Assistant"
           fallback="AI"
         />
@@ -92,7 +92,7 @@ export const Conversation: Story = {
       </Message>
       <Message>
         <MessageAvatar
-          src="/logo_cherry.png"
+          src="/avatar-assistant.png"
           alt="Assistant"
           fallback="AI"
         />
@@ -119,7 +119,7 @@ export const DifferentStyles: Story = {
       </Message>
       <Message>
         <MessageAvatar
-          src="/logo_cherry.png"
+          src="/avatar-assistant.png"
           alt="AI"
           fallback="AI"
         />
