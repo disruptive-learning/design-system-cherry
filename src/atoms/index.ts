@@ -50,7 +50,6 @@ export { Progress } from "./Progress"
 
 export { RadioGroup, RadioGroupItem } from "./RadioGroup"
 
-export { Ripple } from "./Ripple"
 
 export {
   Select,
