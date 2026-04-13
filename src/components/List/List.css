@@ -1,0 +1,139 @@
+/* List Component - Cherry Design System */
+
+/* CheckList */
+.cherry-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans);
+}
+
+.cherry-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.cherry-checklist__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.cherry-checklist__icon--green {
+  color: var(--green);
+}
+
+.cherry-checklist__icon--gray {
+  color: var(--gray-400);
+}
+
+.cherry-checklist__icon--black {
+  color: var(--foreground);
+}
+
+.cherry-checklist__text {
+  color: var(--foreground);
+}
+
+/* CheckList Sizes */
+.cherry-checklist--sm {
+  font-size: var(--text-sm);
+}
+
+.cherry-checklist--sm .cherry-checklist__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cherry-checklist--md {
+  font-size: var(--text-base);
+}
+
+.cherry-checklist--md .cherry-checklist__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cherry-checklist--lg {
+  font-size: var(--text-lg);
+}
+
+.cherry-checklist--lg .cherry-checklist__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* CheckList Spacing */
+.cherry-checklist--spacing-tight .cherry-checklist__item {
+  margin-bottom: var(--space-2);
+}
+
+.cherry-checklist--spacing-normal .cherry-checklist__item {
+  margin-bottom: var(--space-4);
+}
+
+.cherry-checklist--spacing-loose .cherry-checklist__item {
+  margin-bottom: var(--space-6);
+}
+
+.cherry-checklist__item:last-child {
+  margin-bottom: 0;
+}
+
+/* Basic List */
+.cherry-list {
+  font-family: var(--font-sans);
+  margin: 0;
+  padding-left: var(--space-6);
+  color: var(--foreground);
+}
+
+.cherry-list--none {
+  list-style: none;
+  padding-left: 0;
+}
+
+.cherry-list--bullet {
+  list-style-type: disc;
+}
+
+.cherry-list--number {
+  list-style-type: decimal;
+}
+
+.cherry-list__item {
+  margin-bottom: var(--space-2);
+}
+
+.cherry-list__item:last-child {
+  margin-bottom: 0;
+}
+
+/* List Sizes */
+.cherry-list--sm {
+  font-size: var(--text-sm);
+}
+
+.cherry-list--md {
+  font-size: var(--text-base);
+}
+
+.cherry-list--lg {
+  font-size: var(--text-lg);
+}
+
+/* List Spacing */
+.cherry-list--spacing-tight .cherry-list__item {
+  margin-bottom: var(--space-1);
+}
+
+.cherry-list--spacing-normal .cherry-list__item {
+  margin-bottom: var(--space-2);
+}
+
+.cherry-list--spacing-loose .cherry-list__item {
+  margin-bottom: var(--space-4);
+}
