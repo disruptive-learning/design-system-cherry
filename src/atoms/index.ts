@@ -52,9 +52,6 @@ export { RadioGroup, RadioGroupItem } from "./RadioGroup"
 
 export { Ripple } from "./Ripple"
 
-export { Dock, DockItem } from "./Dock"
-export type { DockProps, DockItemProps } from "./Dock"
-
 export {
   Select,
   SelectGroup,
