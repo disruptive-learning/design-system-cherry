@@ -10,6 +10,8 @@ export type { BadgeProps } from "./Badge"
 export { Button, buttonVariants } from "./Button"
 export type { ButtonProps } from "./Button"
 
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "./Card"
+
 export { Checkbox } from "./Checkbox"
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./Collapsible"
