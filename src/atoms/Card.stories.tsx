@@ -68,8 +68,8 @@ export const WithImage: Story = {
   render: () => (
     <Card className="w-[350px] overflow-hidden">
       <img
-        src="/illustration-flowers.png"
-        alt="Landscape"
+        src="/illustrations/bloom-coral-rose.jpg"
+        alt="Dreamy blurred rose in coral and periwinkle tones"
         className="w-full h-40 object-cover"
       />
       <CardHeader>
