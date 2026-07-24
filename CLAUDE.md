@@ -1,66 +1,81 @@
-# Cherry Design System - Claude Instructions
+# Cherry design system — Agent instructions
 
-## Project Overview
-This is the design system for **Cherry AI** (trycherry.ai). It's built with React, Tailwind CSS, shadcn/ui, and follows Atomic Design Methodology.
+## Brand
 
-## Tech Stack
-- **React 19** + TypeScript
-- **Tailwind CSS v4**
-- **shadcn/ui** components as base
-- **Storybook 10** for documentation
-- **Tabler Icons** (`@tabler/icons-react`)
-- **Three.js** for 3D components (Orb)
+Canonical identity, voice, design, color, typography, Orb, imagery, and product
+UI vocabulary live in [`../cherry_brand/`](../cherry_brand/). This repository
+implements reusable React components and Storybook; it does not define brand
+rules.
 
-## Design Principles
+Before visual work, read:
 
-### Typography
-- **Geist Mono** (`font-mono`): Titles, headings, buttons, badges, labels
-- **Geist Sans** (`font-sans`): Body text, descriptions, help text
-- **No bold fonts**: Use `font-normal` or `font-medium` only
+- [`../cherry_brand/CLAUDE.md`](../cherry_brand/CLAUDE.md)
+- [`../cherry_brand/DESIGN.md`](../cherry_brand/DESIGN.md)
+- [`../cherry_brand/COLOR.md`](../cherry_brand/COLOR.md)
+- [`../cherry_brand/TYPOGRAPHY.md`](../cherry_brand/TYPOGRAPHY.md)
+- [`../cherry_brand/ORB.md`](../cherry_brand/ORB.md)
+- [`../cherry_brand/PRODUCT-UI.md`](../cherry_brand/PRODUCT-UI.md)
 
-### Colors
-- **Grayscale theme**: No colors except for destructive states
-- Uses oklch color space for precise grays
-- Dark mode supported via `.dark` class
+If existing component code or stories disagree with canon, treat that as
+implementation debt and align the implementation. Do not preserve drift by
+restating it in this file.
 
-### Component Conventions
-- Use `className="size-4"` for icon sizing (not `w-4 h-4`)
-- Always use `cn()` utility for merging classNames
-- Prefer `forwardRef` for all components
-- Export types separately: `export type { ComponentProps }`
+## Project overview
 
-## Atomic Design Structure
+React component library built with Atomic Design and documented in Storybook.
 
-```
+## Tech stack
+
+- React 19 and strict TypeScript.
+- Tailwind CSS v4.
+- shadcn/ui and Radix/Base UI primitives.
+- Storybook 10.
+- Tabler Icons.
+- Three.js where a component genuinely requires WebGL.
+
+## Component conventions
+
+- Use `className="size-4"` for icon sizing, not separate width/height classes.
+- Merge classes through `cn()`.
+- Forward refs for components that render DOM nodes.
+- Export component prop types separately.
+- Use canonical semantic tokens; do not hardcode brand values.
+- Create a sibling `.stories.tsx` file for every reusable component.
+- Export from the appropriate atomic-level barrel.
+
+## Atomic structure
+
+```text
 src/
-├── atoms/          # Basic UI elements (Button, Input, Badge, etc.)
-├── molecules/      # Combinations of atoms (Calendar, Tabs, CodeBlock)
-├── organisms/      # Complex components (ChatContainer, Message, PromptInput)
-├── pages/          # Page layouts
-├── templates/      # Page templates
-└── components/ui/  # shadcn/ui base components (don't modify directly)
+├── atoms/
+├── molecules/
+├── organisms/
+├── pages/
+├── templates/
+└── components/ui/
 ```
 
-## Icon Usage
-```tsx
-import { IconName } from "@tabler/icons-react"
-<IconName className="size-4" />
-```
+Composition-specific page and application behavior remains with consumers.
 
-## Creating New Components
+## Creating a component
 
-1. Create component in appropriate atomic level folder
-2. Create `.stories.tsx` file alongside
-3. Export from folder's `index.ts`
-4. Use existing components as reference
+1. Confirm that composition of existing primitives does not already solve the
+   need.
+2. Choose the correct atomic level.
+3. Implement against semantic tokens and canonical behavior.
+4. Add default, state, theme, accessibility, and reduced-motion stories as
+   applicable.
+5. Export from the folder barrel.
+6. Run Storybook, lint, and build.
 
-### Story Template
+## Story template
+
 ```tsx
 import type { Meta, StoryObj } from "@storybook/react"
 import { Component } from "./Component"
 
 const meta: Meta<typeof Component> = {
-  title: "Atoms/Component",  // or Molecules/, Organisms/
+  title: "Atoms/Component",
   component: Component,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
@@ -69,32 +84,35 @@ const meta: Meta<typeof Component> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = { args: {} }
 ```
 
-## Key Files
-- `src/index.css` - Theme tokens and animations
-- `src/lib/utils.ts` - `cn()` utility function
-- `src/atoms/index.ts` - All atom exports
+## Key files
+
+- `src/index.css` — implementation tokens and animation definitions.
+- `src/lib/utils.ts` — `cn()` helper.
+- `src/atoms/index.ts` — atom exports.
 
 ## Commands
+
 ```bash
-npm run storybook    # Start Storybook dev server
-npm run build        # Build the library
-npm run lint         # Run ESLint
+npm run storybook
+npm run build
+npm run lint
 ```
 
-## AI-Specific Components
-Components tagged with `tags: ["ai"]` in Storybook are specific to AI chat interfaces:
-- `Loader` (multiple variants for AI thinking states)
-- `Orb` (3D animated orb)
-- `Terminal` (typing animation)
-- `ChainOfThought`, `Reasoning`, `ResponseStream`
-- `Message`, `PromptInput`, `ChatContainer`
+## Cherry-specific components
 
-## Notes
-- Don't use `asChild` with components that render multiple children (causes React.Children.only error)
-- Clear Storybook cache if components don't update: `rm -rf node_modules/.cache/storybook`
-- Use Node.js v20.19+ for best compatibility
+- `Orb` implementations must conform to `cherry_brand/ORB.md`; a legacy
+  wireframe sphere is implementation drift, not canon.
+- Loaders communicate real operation state.
+- Conversation components expose useful rationale and evidence, not hidden
+  chain-of-thought.
+- `Message`, `PromptInput`, and `ChatContainer` are reusable interaction
+  primitives, not Cherry's category or identity.
+
+## Operational notes
+
+- Do not use `asChild` with a component that renders multiple children.
+- Clear the Storybook cache if local component changes do not appear.
+- Use the Node version required by `package.json`.
