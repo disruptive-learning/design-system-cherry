@@ -15,9 +15,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Where to run the Linux jobs. Self-hosted (the Mac mini's Ubuntu VM,
+  # label `cherry-linux`) when it is online, GitHub-hosted otherwise — so a
+  # power cut at the mini queues nothing: the run simply falls back to
+  # ubuntu-latest and returns to the mini on its own once it is back. This job
+  # never fails: any API error means "use GitHub-hosted".
+  pick-runner:
+    name: Pick runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      linux: ${{ steps.pick.outputs.linux }}
+    steps:
+      - id: pick
+        env:
+          GH_TOKEN: ${{ secrets.RUNNER_STATUS_TOKEN }}
+        run: |
+          online=$(gh api --paginate /orgs/disruptive-learning/actions/runners \
+            --jq '[.runners[] | select(.status == "online") | select(any(.labels[]; .name == "cherry-linux"))] | length' \
+            2>/dev/null || echo 0)
+          if [ "${online:-0}" -gt 0 ]; then
+            echo "self-hosted cherry-linux runner online ($online) — using it"
+            echo 'linux=["self-hosted","cherry-linux"]' >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::no cherry-linux runner online — falling back to ubuntu-latest"
+            echo 'linux="ubuntu-latest"' >> "$GITHUB_OUTPUT"
+          fi
+
   build:
     name: Build Storybook
-    runs-on: ubuntu-latest
+    needs: pick-runner
+    runs-on: ${{ fromJSON(needs.pick-runner.outputs.linux) }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -40,8 +68,8 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
+    needs: [build, pick-runner]
+    runs-on: ${{ fromJSON(needs.pick-runner.outputs.linux) }}
     timeout-minutes: 5
     environment:
       name: github-pages
